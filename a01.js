@@ -120,15 +120,15 @@ function rotate(){
 }
 
 function rotatePoint(cx, cy, x, y, angle) {
-    var radians = (Math.PI / 180) * angle;
-    cos = Math.cos(radians);
-    sin = Math.sin(radians);
     // Translate image coordinate to cartesian coordinate
-    nx = x - cx;
-    ny = y - cy;
-    // apply formula
-    nx = (cos * (nx)) + (sin * (ny)) + cx;
-    ny = (cos * (ny)) - (sin * (nx)) + cy;
+    x_1 = x - cx;
+    y_1 = y - cy;
+    // Apply formula
+    var radians = (Math.PI / 180) * angle,
+        cos = Math.cos(radians),
+        sin = Math.sin(radians),
+        nx = (cos * (x_1)) + (sin * (y_1)),
+        ny = (cos * (y_1)) - (sin * (x_1));
     // Translate cartesian coordinate to image coordinate
     nx += cx
     ny += cy
