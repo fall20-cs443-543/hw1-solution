@@ -105,30 +105,30 @@ function rotate(){
     // create ImageData object
     var new_image_data = ctx.createImageData(image_data);
     for(var i = 0; i < image_data.data.length; i+= 4){
-        let pixel_pos = parseInt(i / 4);
+        let pixel_pos = i / 4;
         let x = pixel_pos % canvas.width;
-        let y = parseInt(pixel_pos / canvas.width);
+        let y = pixel_pos / canvas.width;
 
         let xy_rotated = rotatePoint(canvas.width / 2, canvas.height / 2, x, y, degree);
         let arr_pos = (Math.floor(xy_rotated[0]) + Math.floor(xy_rotated[1]) * canvas.width) * 4;
-        new_image_data.data[arr_pos + 0] = ppm_image_data.data[i + 0];
-        new_image_data.data[arr_pos + 1] = ppm_image_data.data[i + 1];
-        new_image_data.data[arr_pos + 2] = ppm_image_data.data[i + 2];
-        new_image_data.data[arr_pos + 3] = ppm_image_data.data[i + 3];
+        new_image_data.data[i + 0] = ppm_image_data.data[arr_pos + 0];
+        new_image_data.data[i + 1] = ppm_image_data.data[arr_pos + 1];
+        new_image_data.data[i + 2] = ppm_image_data.data[arr_pos + 2];
+        new_image_data.data[i + 3] = ppm_image_data.data[arr_pos + 3];
     }
     ctx.putImageData(new_image_data, 0, 0);
 }
 
 function rotatePoint(cx, cy, x, y, angle) {
     // Translate image coordinate to cartesian coordinate
-    x_1 = x - cx;
-    y_1 = y - cy;
+    let x_1 = x - cx;
+    let y_1 = y - cy;
     // Apply formula
     var radians = (Math.PI / 180) * angle,
         cos = Math.cos(radians),
         sin = Math.sin(radians),
-        nx = (cos * (x_1)) + (sin * (y_1)),
-        ny = (cos * (y_1)) - (sin * (x_1));
+        nx = (cos * (x_1)) - (sin * (y_1)),
+        ny = (cos * (y_1)) + (sin * (x_1));
     // Translate cartesian coordinate to image coordinate
     nx += cx
     ny += cy
