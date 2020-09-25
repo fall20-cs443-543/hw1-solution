@@ -1,8 +1,5 @@
 /*
-  Basic File I/O for displaying
-  Skeleton Author: Joshua A. Levine
-  Email: josh@email.arizona.edu
-  Modified by: Xueheng Wan
+  Author: Xueheng Wan
   Email: wanxueheng@email.arizona.edu
   */
 
@@ -68,7 +65,7 @@ function parsePPM(file_data){
      * Extract Pixel Data
      */
     var bytes = new Uint8Array(3 * width * height);  // i-th R pixel is at 3 * i; i-th G is at 3 * i + 1; etc.
-                                                            // i-th pixel is on Row i / width and on Column i % width
+    // i-th pixel is on Row i / width and on Column i % width
     // Raw data must be last 3 X W X H bytes of the image file
     var raw_data = file_data.substring(file_data.length - width * height * 3);
     for(var i = 0; i < width * height * 3; i ++){
@@ -123,18 +120,18 @@ function rotate(){
 }
 
 function rotatePoint(cx, cy, x, y, angle) {
-    var radians = (Math.PI / 180) * angle,
-        cos = Math.cos(radians),
-        sin = Math.sin(radians),
-        // Translate image coordinate to cartesian coordinate
-        nx = x - cx;
-        ny = y - cy;
-        // apply formula
-        nx = (cos * (nx)) + (sin * (ny)) + cx;
-        ny = (cos * (ny)) - (sin * (nx)) + cy;
-        // Translate cartesian coordinate to image coordinate
-        nx += cx
-        ny += cy
+    var radians = (Math.PI / 180) * angle;
+    cos = Math.cos(radians);
+    sin = Math.sin(radians);
+    // Translate image coordinate to cartesian coordinate
+    nx = x - cx;
+    ny = y - cy;
+    // apply formula
+    nx = (cos * (nx)) + (sin * (ny)) + cx;
+    ny = (cos * (ny)) - (sin * (nx)) + cy;
+    // Translate cartesian coordinate to image coordinate
+    nx += cx
+    ny += cy
     return [nx, ny];
 }
 
